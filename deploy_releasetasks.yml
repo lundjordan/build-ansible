@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+  remote_user: root
+  tasks:
+      - name: git status
+        git: repo=https://github.com/mozilla/releasetasks dest=/home/cltbld/releasetasks
+        become: yes
+        become_user: cltbld
+      - name: restarting releaserunner
+        command: supervisorctl restart releaserunner
